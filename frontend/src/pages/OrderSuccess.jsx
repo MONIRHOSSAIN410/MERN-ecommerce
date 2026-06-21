@@ -1,11 +1,10 @@
-import { useParams, useNavigate } from 'react-router';
+import { useParams, useNavigate } from 'react-router-dom'; // 🛠️ FIXED: Changed from 'react-router' to 'react-router-dom'
 
 const OrderSuccess = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
   const goHome = () => {
-    // 🛠️ SMART FIX: Uses client-side routing instead of a hard browser refresh
     navigate("/");
   };
 
@@ -23,13 +22,13 @@ const OrderSuccess = () => {
       <p className='mt-4 text-gray-600'>
         Thank you for your purchase. Your Order ID is:{" "}
         <span className='font-mono font-semibold bg-gray-100 px-2 py-1 rounded text-gray-800 break-all select-all'>
-          {id}
+          {id || "Processing..."} {/* Fallback text if ID is temporarily undefined */}
         </span>
       </p>
 
       <button 
         onClick={goHome} 
-        className='inline-block mt-8 bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2.5 rounded shadow dynamic-transition'
+        className='inline-block mt-8 bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2.5 rounded shadow transition-all duration-200'
       >
         Continue Shopping
       </button>
